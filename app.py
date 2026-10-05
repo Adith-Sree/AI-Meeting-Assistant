@@ -168,15 +168,28 @@ def main():
         st.title("AI Meeting Assistant")
         st.write("An AI-powered Meeting Assistant for the Inter-IIT ML Bootcamp.")
         
+        # Read from st.secrets if deployed on Streamlit Cloud, otherwise fall back to environment variables
+        default_deepgram = ""
+        default_groq = ""
+        try:
+            default_deepgram = st.secrets.get("DEEPGRAM_API_KEY", "")
+            default_groq = st.secrets.get("GROQ_API_KEY", "")
+        except Exception:
+            pass
+        if not default_deepgram:
+            default_deepgram = os.environ.get("DEEPGRAM_API_KEY", "")
+        if not default_groq:
+            default_groq = os.environ.get("GROQ_API_KEY", "")
+
         deepgram_key = st.text_input(
             "Deepgram API Key", 
-            value=os.environ.get("DEEPGRAM_API_KEY", ""), 
+            value=default_deepgram, 
             type="password"
         )
         
         groq_key = st.text_input(
             "Groq API Key", 
-            value=os.environ.get("GROQ_API_KEY", ""), 
+            value=default_groq, 
             type="password"
         )
         
