@@ -1,5 +1,7 @@
 # AI Meeting Assistant
 
+**Live Deployment:** [https://ai-meeting-assistant-hzp6gbfpbug6t6pxi2caep.streamlit.app/](https://ai-meeting-assistant-hzp6gbfpbug6t6pxi2caep.streamlit.app/)
+
 An AI-powered meeting assistant that converts recorded meetings into accurate transcripts and structured meeting records using a coordinated multi-model pipeline.
 
 ---
