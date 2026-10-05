@@ -17,7 +17,7 @@ The **AI Meeting Assistant** simplifies meeting documentation by combining high-
 | Problem in Existing Tools | Real-World Consequence | How Our Pipeline Solves It |
 |---|---|---|
 | **1. The "Hallucination & Phantom Deadline" Flaw** | In Otter/Zoom, if someone casually remarks "maybe we could look into Redis sometime", the LLM frequently invents: *"Action Item: Alex to migrate to Redis by EOD"*. | **Strict Grounding & Explicit Nulls:** In Stage 3, we force strict negative prompting and output constraints: missing owners/deadlines must be marked as `Unspecified` rather than guessed. Proposals are strictly isolated from consensus decisions. |
-| **2. Technical Jargon Mangle (Compounding Errors)** | General STT models corrupt niche acronyms and tech terms (e.g., PostgreSQL → *"post gray sequel"*, gRPC → *"G RPC"*, Kubernetes → *"cooper netties"*). Standard tools feed this garbage directly into summarizers. | **Two-Stage Decoupled Pipeline:** We don't do single-shot summarization. Stage 1 (Deepgram Nova-2) handles acoustic diarization; Stage 2 (Groq Llama 3.1 70B) specifically runs domain vocabulary refinement *before* any summaries are generated. |
+| **2. Technical Jargon Mangle (Compounding Errors)** | General STT models corrupt niche acronyms and tech terms (e.g., PostgreSQL → *"post gray sequel"*, gRPC → *"G RPC"*, Kubernetes → *"cooper netties"*). Standard tools feed this garbage directly into summarizers. | **Two-Stage Decoupled Pipeline:** We don't do single-shot summarization. Stage 1 (Deepgram Nova-2) handles acoustic diarization; Stage 2 (GPT OSS) specifically runs domain vocabulary refinement *before* any summaries are generated. |
 | **3. The "Black Box" Auditability Problem** | Existing tools only show you the final summary or raw audio. When an action item looks wrong, you have no way to trace where the model got confused without re-listening to the entire hour. | **Dual-Transcript Lineage:** We persist and expose both the **Raw Acoustic Transcript** and the **Domain-Refined Transcript** side-by-side, so teams can audit every modification. |
 | **4. Unstructured / Un-actionable Outputs** | Most tools dump walls of text with bold bullet points. You still have to manually copy-paste into Jira, Linear, or Notion. | **Dual-Format Parity (Human + Machine):** Simultaneously outputs formatted Markdown and strict JSON with identical schemas for direct webhook/API ingestion into ticketing systems. |
 
@@ -26,8 +26,8 @@ The **AI Meeting Assistant** simplifies meeting documentation by combining high-
 ## Tech Stack
 
 - **Speech-to-Text (STT):** [Deepgram Nova-2](https://deepgram.com/) — High-accuracy, low-latency automated speech transcription with smart formatting and speaker diarization.
-- **LLM (Transcript Refinement):** [Groq](https://groq.com/) — Llama 3.1 70B Versatile for context-aware grammar correction, disfluency removal, speaker formatting, and terminology normalization.
-- **LLM (Minutes & Insights Generation):** [Groq](https://groq.com/) — Llama 3.1 70B Versatile for high-level semantic analysis, executive summary generation, decision extraction, and action item tracking.
+- **LLM (Transcript Refinement):** [Groq](https://groq.com/) — GPT OSS for context-aware grammar correction, disfluency removal, speaker formatting, and terminology normalization.
+- **LLM (Minutes & Insights Generation):** [Groq](https://groq.com/) — GPT OSS for high-level semantic analysis, executive summary generation, decision extraction, and action item tracking.
 - **Frontend / UI:** [Streamlit](https://streamlit.io/) — Fast, responsive, and intuitive web application interface for uploading audio, configuring pipelines, inspecting intermediate outputs, and downloading records.
 
 ---
@@ -48,13 +48,13 @@ The system operates via a sequential multi-stage processing pipeline:
          │ Raw Transcript
          ▼
 ┌───────────────────────────────┐
-│   Groq LLM Stage 1            │ (Llama 3.1 70B Versatile)
+│   Groq LLM Stage 1            │ (GPT OSS)
 │   (Transcript Refinement)     │
 └────────┬──────────────────────┘
          │ Refined Transcript (Diarized & Polished)
          ▼
 ┌───────────────────────────────┐
-│   Groq LLM Stage 2            │ (Llama 3.1 70B Versatile)
+│   Groq LLM Stage 2            │ (GPT OSS)
 │   (Minutes / Decisions / Tasks│
 └────────┬──────────────────────┘
          │ Structured Output (Markdown & JSON)
@@ -73,12 +73,12 @@ The system operates via a sequential multi-stage processing pipeline:
    - Applies deep-learning-based speaker diarization to differentiate speakers.
    - Handles multi-accent speech, domain-specific vocabularies, and background noise filtering.
 
-2. **Groq Llama 3.1 70B Versatile — Stage 1: Transcript Refinement**
+2. **Groq GPT OSS — Stage 1: Transcript Refinement**
    - Corrects acoustic misrecognitions using semantic context and meeting subject cues.
    - Cleans up speech disfluencies (fillers, false starts, stuttering) while preserving conversational meaning.
    - Formats conversation flow with clear speaker tags and cohesive paragraphs.
 
-3. **Groq Llama 3.1 70B Versatile — Stage 2: Minutes, Decisions & Action Items**
+3. **Groq GPT OSS — Stage 2: Minutes, Decisions & Action Items**
    - Synthesizes meeting context into an executive summary and agenda breakdown.
    - Extracts consensus points, formal agreements, and architectural/business decisions.
    - Identifies concrete action items with assignees, deadlines, and dependencies.
@@ -167,7 +167,7 @@ Structured schema suitable for CRM, Jira, Notion, or Slack webhooks:
   "action_items": [
     {
       "id": "ACT-001",
-      "task": "Benchmark end-to-end latency with Groq Llama 3.1 70B.",
+      "task": "Benchmark end-to-end latency with GPT OSS.",
       "assignee": "Speaker 0",
       "due_date": "2026-10-10",
       "status": "Pending"
