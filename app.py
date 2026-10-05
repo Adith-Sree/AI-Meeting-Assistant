@@ -35,7 +35,8 @@ def get_audio_mime_type(filename: str) -> str:
 def process_stage_1_deepgram(audio_bytes: bytes, mime_type: str, api_key: str) -> str:
     """Stage 1: Transcribe audio using Deepgram Nova-2 (SDK v7)."""
     try:
-        client = DeepgramClient(api_key)
+        # Pass timeout to prevent the write operation from timing out for large files
+        client = DeepgramClient(api_key=api_key, timeout=600.0)
         
         # Use v7 SDK API: pass audio bytes and options as keyword arguments
         response = client.listen.v1.media.transcribe_file(
@@ -69,7 +70,8 @@ def process_stage_1_deepgram(audio_bytes: bytes, mime_type: str, api_key: str) -
 def process_stage_2_refine_transcript(raw_transcript: str, api_key: str) -> str:
     """Stage 2: Refine transcript using Groq."""
     try:
-        client = Groq(api_key=api_key)
+        # Increase timeout for large transcripts
+        client = Groq(api_key=api_key, timeout=300.0)
         
         system_prompt = (
             "You are a transcript refinement specialist. Your task is to correct recognition errors "
@@ -79,7 +81,7 @@ def process_stage_2_refine_transcript(raw_transcript: str, api_key: str) -> str:
         )
         
         completion = client.chat.completions.create(
-            model="llama-3.1-70b-versatile",
+            model="openai/gpt-oss-120b",
             messages=[
                 {"role": "system", "content": system_prompt},
                 {"role": "user", "content": raw_transcript}
@@ -94,7 +96,8 @@ def process_stage_2_refine_transcript(raw_transcript: str, api_key: str) -> str:
 def process_stage_3_meeting_minutes(refined_transcript: str, api_key: str) -> Tuple[str, str]:
     """Stage 3: Generate meeting minutes in Markdown and JSON using Groq."""
     try:
-        client = Groq(api_key=api_key)
+        # Increase timeout for large transcripts
+        client = Groq(api_key=api_key, timeout=300.0)
         
         # Markdown prompt
         md_system_prompt = (
@@ -117,7 +120,7 @@ def process_stage_3_meeting_minutes(refined_transcript: str, api_key: str) -> Tu
         )
         
         md_completion = client.chat.completions.create(
-            model="llama-3.1-70b-versatile",
+            model="openai/gpt-oss-120b",
             messages=[
                 {"role": "system", "content": md_system_prompt},
                 {"role": "user", "content": refined_transcript}
@@ -137,7 +140,7 @@ def process_stage_3_meeting_minutes(refined_transcript: str, api_key: str) -> Tu
         )
         
         json_completion = client.chat.completions.create(
-            model="llama-3.1-70b-versatile",
+            model="openai/gpt-oss-120b",
             messages=[
                 {"role": "system", "content": json_system_prompt},
                 {"role": "user", "content": refined_transcript}
@@ -196,7 +199,7 @@ def main():
         st.divider()
         st.write("### Tech Stack")
         st.write("- **Speech-to-Text**: Deepgram Nova-2")
-        st.write("- **LLM**: Groq (Llama-3.1-70b-versatile)")
+        st.write("- **LLM**: Groq (openai/gpt-oss-120b)")
         st.write("- **UI**: Streamlit")
 
     # Main Area
