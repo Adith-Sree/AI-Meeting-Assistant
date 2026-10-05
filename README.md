@@ -10,6 +10,17 @@ The **AI Meeting Assistant** simplifies meeting documentation by combining high-
 
 ---
 
+## Why This Pipeline?
+
+| Problem in Existing Tools | Real-World Consequence | How Our Pipeline Solves It |
+|---|---|---|
+| **1. The "Hallucination & Phantom Deadline" Flaw** | In Otter/Zoom, if someone casually remarks "maybe we could look into Redis sometime", the LLM frequently invents: *"Action Item: Alex to migrate to Redis by EOD"*. | **Strict Grounding & Explicit Nulls:** In Stage 3, we force strict negative prompting and output constraints: missing owners/deadlines must be marked as `Unspecified` rather than guessed. Proposals are strictly isolated from consensus decisions. |
+| **2. Technical Jargon Mangle (Compounding Errors)** | General STT models corrupt niche acronyms and tech terms (e.g., PostgreSQL → *"post gray sequel"*, gRPC → *"G RPC"*, Kubernetes → *"cooper netties"*). Standard tools feed this garbage directly into summarizers. | **Two-Stage Decoupled Pipeline:** We don't do single-shot summarization. Stage 1 (Deepgram Nova-2) handles acoustic diarization; Stage 2 (Groq Llama 3.1 70B) specifically runs domain vocabulary refinement *before* any summaries are generated. |
+| **3. The "Black Box" Auditability Problem** | Existing tools only show you the final summary or raw audio. When an action item looks wrong, you have no way to trace where the model got confused without re-listening to the entire hour. | **Dual-Transcript Lineage:** We persist and expose both the **Raw Acoustic Transcript** and the **Domain-Refined Transcript** side-by-side, so teams can audit every modification. |
+| **4. Unstructured / Un-actionable Outputs** | Most tools dump walls of text with bold bullet points. You still have to manually copy-paste into Jira, Linear, or Notion. | **Dual-Format Parity (Human + Machine):** Simultaneously outputs formatted Markdown and strict JSON with identical schemas for direct webhook/API ingestion into ticketing systems. |
+
+---
+
 ## Tech Stack
 
 - **Speech-to-Text (STT):** [Deepgram Nova-2](https://deepgram.com/) — High-accuracy, low-latency automated speech transcription with smart formatting and speaker diarization.
