@@ -17,6 +17,12 @@ venv/
 *.swp
 *.swo
 
+# Report Latex
+model_report.tex
+
+# Demonstration Video
+Demonstration Video
+
 # OS
 .DS_Store
 Thumbs.db
