@@ -192,4 +192,4 @@ Structured schema suitable for CRM, Jira, Notion, or Slack webhooks:
 - **Team Name:** Paradise
 - **Contributors:** 
   - M Charan Sree Teja (`t.menni@iitg.ac.in`)
-  - Adith Sree K (`r.sreepuram@iitg.ac.in`)
+  - Adith Sreepuram (`r.sreepuram@iitg.ac.in`)
