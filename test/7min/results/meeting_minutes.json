@@ -1,0 +1,73 @@
+{
+  "meeting_summary": "The daily stand‑up covered progress and blockers across several teams. John reported token refresh issues and a intermittent password‑reset email bug, and planned to check the updated database schema. Evan discussed UI component development, state‑management problems in React, and ongoing bundle‑size optimization efforts. The QA team shared findings from automated tests and upcoming end‑to‑end tests. The group agreed to schedule a performance‑optimization meeting later in the week and confirmed the team‑building escape‑room activity for next Thursday.",
+  "minutes": [
+    "John is working on the authentication service, facing token refresh issues and an intermittent password‑reset email bug.",
+    "John needs clarification on security requirements from the client and will discuss with Henry when available.",
+    "John will check the updated database schema on Slack after the stand‑up.",
+    "Evan implemented new UI components for the dashboard, encountering state‑management issues in React related to asynchronous WebSocket updates.",
+    "Evan plans to refactor using Redux and explore Redux Saga for side‑effects, and will push an initial version to staging this afternoon for review tomorrow.",
+    "Evan is addressing bundle size problems with code splitting, lazy loading, aggressive tree shaking, and a potential service worker.",
+    "The QA team reported edge cases in the user‑profile update flow and an intermittent bug with profile picture updates; a full report will be sent this afternoon.",
+    "QA is also setting up new end‑to‑end tests for the dashboard feature, expected ready for review by tomorrow.",
+    "The team agreed to schedule a separate performance‑optimization meeting later this week, with data to be prepared by the responsible party.",
+    "The product owner mentioned upcoming priority changes due to a client‑driven data‑export feature, to be discussed in sprint planning later today.",
+    "The team confirmed the escape‑room team‑building activity scheduled for next Thursday afternoon."
+  ],
+  "key_decisions": [
+    "Schedule a performance‑optimization meeting later this week.",
+    "Confirm the escape‑room team‑building activity for next Thursday afternoon.",
+    "Push the initial UI components to staging this afternoon and aim for a review by tomorrow afternoon.",
+    "QA will send the full report on user‑profile edge cases this afternoon.",
+    "Prepare end‑to‑end tests for the dashboard feature for review by tomorrow."
+  ],
+  "action_items": [
+    {
+      "task": "Debug the intermittent password‑reset email issue",
+      "owner": "John",
+      "deadline": "Unspecified",
+      "status": "Pending"
+    },
+    {
+      "task": "Check the updated database schema on Slack",
+      "owner": "John",
+      "deadline": "Unspecified",
+      "status": "Pending"
+    },
+    {
+      "task": "Push initial UI components to the staging environment",
+      "owner": "Evan",
+      "deadline": "This afternoon",
+      "status": "Pending"
+    },
+    {
+      "task": "Prepare UI components for review",
+      "owner": "Evan",
+      "deadline": "Tomorrow afternoon",
+      "status": "Pending"
+    },
+    {
+      "task": "Optimize bundle size (code splitting, lazy loading, tree shaking, service worker)",
+      "owner": "Evan",
+      "deadline": "Unspecified",
+      "status": "Pending"
+    },
+    {
+      "task": "Send full report of user‑profile update flow edge cases",
+      "owner": "Unspecified",
+      "deadline": "This afternoon",
+      "status": "Pending"
+    },
+    {
+      "task": "Prepare end‑to‑end tests for the dashboard feature",
+      "owner": "Unspecified",
+      "deadline": "Tomorrow",
+      "status": "Pending"
+    },
+    {
+      "task": "Prepare data and schedule performance‑optimization meeting",
+      "owner": "Unspecified",
+      "deadline": "Later this week",
+      "status": "Pending"
+    }
+  ]
+}

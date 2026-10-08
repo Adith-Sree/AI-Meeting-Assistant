@@ -1,0 +1,91 @@
+Speaker 0: From clean code to clear communication, welcome to English Not Null, where you learn to present your work with confidence and precision.
+Speaker 1: Have you ever struggled to explain a complex technical problem during a daily meeting in English?
+Speaker 1: You know the issue, but finding the right words can be tough.
+Speaker 1: In this video, we'll listen to a realistic daily stand up.
+Speaker 1: Your goal is to pay attention to the specific phrases used to describe challenges.
+Speaker 1: Notice how the developers talk about bugs,
+Speaker 1: blockers, and performance issues. This is the real everyday language you'll use in your career.
+Speaker 1: Let's jump in.
+Speaker 1: Alright, team. Let's kick off our daily stand up. Who wants to start today?
+Speaker 2: I can go first.
+Speaker 3: I've been working on the new authentication service. How's it coming along? Any progress?
+Speaker 3: Yeah. It's going
+Speaker 3: okay.
+Speaker 3: I've got the basic structure set up, but I've run into some issues with token refresh.
+Speaker 3: Sometimes the tokens are expiring before they should. I think I need to dig deeper into our JWT
+Speaker 3: library.
+Speaker 3: Do you need any help with that? I might need to discuss further with Alex's team. He's worked with this library before.
+Speaker 3: Okay. You've cleared up all other information about this ticket. Right? I've been waiting for some clarification on the security requirements from the client.
+Speaker 1: I see. Have you talked to Henry about it? He's our point of contact with the client.
+Speaker 3: He was quite busy yesterday, so he couldn't help.
+Speaker 2: Oh, I'm sorry about that, John. I've been swamped with meetings.
+Speaker 2: After this meeting, come to my desk, and we'll clarify these issues. Okay? Great. Thanks, Henry.
+Speaker 3: John, what's your plan for today? I'll keep working on the token validation logic.
+Speaker 3: Oh, and there's that weird bug with the password reset feature I need to look into. The password reset? What's going on with that? It's...
+Speaker 3: Sometimes it doesn't send the reset email.
+Speaker 3: Like, you request a reset, and it just
+Speaker 3: doesn't work. You know?
+Speaker 1: That sounds tricky.
+Speaker 1: Any ideas what's causing it?
+Speaker 3: Not really.
+Speaker 3: I mean, it works fine most of the time. It's just
+Speaker 3: sometimes it doesn't.
+Speaker 3: I'll debug it and update you later.
+Speaker 1: Alright.
+Speaker 1: Keep at it. Let me know if you need any help. Okay? Yeah. Sure.
+Speaker 3: Oh, wait. Almost forgot. Has anyone seen the updated database schema?
+Speaker 1: I thought the DBA team was supposed to send it over. I think Mark mentioned something about that in the team chat this morning. Did you check Slack? Oh, man.
+Speaker 3: Slack.
+Speaker 3: Why didn't he send an email?
+Speaker 3: I haven't looked at Slack today.
+Speaker 3: I'll check after the stand up.
+Speaker 1: Sounds good.
+Speaker 1: Anything else you wanna bring up? Nah. That's it for me.
+Speaker 1: Alright.
+Speaker 1: Thanks, John.
+Speaker 1: Evan, what's your status?
+Speaker 2: Yesterday, I was implementing the new UI components for the dashboard
+Speaker 2: and ran into some issues with state management in React.
+Speaker 2: Today, I'll be refactoring the code to use Redux for better state handling.
+Speaker 2: State management issues again. What's happening this time? It seems that sometimes the component states aren't syncing properly.
+Speaker 2: It's causing inconsistencies in the UI, especially when dealing with real time updates.
+Speaker 1: That sounds concerning.
+Speaker 1: Do you have any leads on the cause?
+Speaker 2: I suspect it might be related to how we're handling asynchronous actions, particularly with our WebSocket connections.
+Speaker 2: When multiple updates come in rapidly, we seem to lose some state changes.
+Speaker 1: That's possible. Have you looked into using middleware like Redux Saga to handle side effects?
+Speaker 2: Yes. I've been researching that. I think implementing Redux Saga might help us manage these complex asynchronous flows better.
+Speaker 1: Have you discussed this with the rest of the front end team?
+Speaker 2: Not yet. I'm trying to put together a small proof of concept before bringing it up,
+Speaker 2: but I may need their input soon.
+Speaker 1: What about the new UI components?
+Speaker 1: When do you think they'll be ready for review?
+Speaker 2: I'll push the initial version to our staging environment this afternoon.
+Speaker 2: It won't be fully styled yet, but the core functionality should be there. I'm aiming to have it ready for a proper review by tomorrow afternoon.
+Speaker 1: That would be helpful. Even if it's not the final version, it will allow the team to start testing and provide feedback.
+Speaker 2: I'll prioritize getting a testable version out.
+Speaker 1: What else have you been working on?
+Speaker 2: There's an ongoing issue with our bundle size. It's getting pretty large and affecting load times.
+Speaker 1: Right. You mentioned that in our last sprint retrospective.
+Speaker 1: Still working through it?
+Speaker 2: Yes. I've started implementing code splitting and lazy loading for some of our larger components, but we're still seeing longer than ideal load times on slower connections.
+Speaker 1: That's concerning. What's your plan to address it further?
+Speaker 2: I'm looking into using Webpack's tree shaking more aggressively
+Speaker 2: and potentially moving some of our larger dependencies to be loaded on demand.
+Speaker 2: I'm also considering implementing a service worker for better caching.
+Speaker 2: I'm hoping this will improve the situation, but it's a complex issue.
+Speaker 1: Perhaps we should schedule a separate meeting to dive deeper into this, maybe involve some of the performance optimization experts from other teams.
+Speaker 4: That's a good idea. I'll put together some data, and we can set that up later this week. Perfect. QA team, what's your status? We've been running our automated test suite against the latest build. We've uncovered a few edge cases in the user profile update flow. Anything critical? Nothing show stopping, but there's an intermittent bug where profile pictures sometimes don't update immediately. I'll send over the full report this afternoon.
+Speaker 2: That might be related to the state management issues I mentioned. I'll take a look once I get your report, Mia.
+Speaker 4: Sounds good. Oh, and we've started setting up some new end to end tests for the dashboard feature. Should have those ready for review by tomorrow. Great work, everyone. Product owner, any updates from your end? Yes. Just a couple of things. I've been reviewing the user stories for our next sprint.
+Speaker 2: We might need to adjust some priorities. What's changing? Well, the client's been pushing for that data export feature.
+Speaker 2: They're saying it's becoming crucial for some of their enterprise customers.
+Speaker 2: Oof. That's gonna be tricky to implement with our current architecture. We might need to rethink how we're handling large datasets on the client side. Yeah. And we'll need to optimize our API endpoints to handle potentially large data exports.
+Speaker 2: Might impact our current API design. I know it's not ideal timing, but it's coming from the executive level. Can we discuss this more in sprint planning later today? Definitely.
+Speaker 4: We'll need to weigh this against our current commitments. Anything else before we wrap up? Just a quick one. Are we still on for that team building activity next week? You know, the escape room challenge? Absolutely.
+Speaker 1: It's booked for next Thursday afternoon.
+Speaker 1: Sounds fun. Looking forward to it. Alright. That wraps up our daily stand up. Thanks, everyone. Let's have a productive day. That's it for our video today. I hope this has been helpful.
+Speaker 1: Now, I have a question for you.
+Speaker 1: What is the most challenging phrase you've had to say during a daily meeting in English?
+Speaker 1: Leave a comment below, and we can all learn from each other. If you found this video valuable,
+Speaker 1: please hit the like button and subscribe to English not null so you don't miss our next video. Thanks for watching, and I'll see you in the next one.
