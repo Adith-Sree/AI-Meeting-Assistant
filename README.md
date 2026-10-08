@@ -189,8 +189,7 @@ Structured schema suitable for CRM, Jira, Notion, or Slack webhooks:
 
 ## Team & Contribution
 
-- **Team Name / Author:** Team InterIIT
+- **Team Name:** Paradise
 - **Contributors:** 
   - M Charan Sree Teja (`t.menni@iitg.ac.in`)
   - Adith Sree K (`r.sreepuram@iitg.ac.in`)
-- **License:** MIT License
