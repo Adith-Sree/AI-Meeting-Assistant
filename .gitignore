@@ -34,3 +34,6 @@ Thumbs.db
 *.txt
 *.json
 !requirements.txt
+!test/**/*.txt
+!test/**/*.json
+
